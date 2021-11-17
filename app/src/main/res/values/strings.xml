@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Elozino_task_5</string>
+    <string name="name_hint">Name</string>
+    <string name="tv_register">Register</string>
+    <string name="phone_number_hint">Phone Number</string>
+    <string name="email_address_hint">Email Address</string>
+    <string name="sex_hint">Sex</string>
+    <string name="register_text">register</string>
+    <string name="required_text">* Required</string>
+
+    <string-array name="sex_array">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+</resources>

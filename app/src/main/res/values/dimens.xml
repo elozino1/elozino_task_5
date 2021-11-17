@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="dimens_input_margin_top_30">30dp</dimen>
+    <dimen name="dimens_margin_register_30">30dp</dimen>
+    <dimen name="dimens_layout_padding_25">25dp</dimen>
+    <dimen name="dimens_register_text_42">42sp</dimen>
+    <dimen name="dimens_sex_tv_padding_10">10dp</dimen>
+    <dimen name="dimens_sex_tv_text_size_15">15sp</dimen>
+    <dimen name="dimens_image_size_150">150dp</dimen>
+</resources>
