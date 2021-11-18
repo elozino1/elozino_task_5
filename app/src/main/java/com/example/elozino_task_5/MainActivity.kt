@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var nameText: String
     lateinit var phoneNumberValue: String
     lateinit var emailText: String
-
+    lateinit var sexText: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
             nameText = name.text.toString()
             phoneNumberValue = phone.text.toString()
             emailText = email.text.toString()
-            val sexText = sexDropDown.text.toString()
+            sexText = sexDropDown.text.toString()
 
             if(ValidatorUtil.isNameValid(nameText)) {
                 information.put("name", nameText)
@@ -64,6 +64,7 @@ class MainActivity : AppCompatActivity() {
             } else Toast.makeText(this, "Select sex", Toast.LENGTH_SHORT).show()
 
 
+            //confirm if all validation calls are passed
             if(information.containsKey("name") && information.containsKey("phone") && information.containsKey("email") && information.containsKey("sex")) {
                 loadNextActivity(information)
             }
@@ -78,6 +79,13 @@ class MainActivity : AppCompatActivity() {
         intent.putExtra("email", information.get("email"))
         intent.putExtra("sex", information.get("sex"))
 
+        //clear the input fields after the register button is tapped
+        nameText = ""
+        phoneNumberValue = ""
+        emailText = ""
+        sexText = ""
+
+        //launch the activity showing the user's information
         startActivity(intent)
     }
 }
