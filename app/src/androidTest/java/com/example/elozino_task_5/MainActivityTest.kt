@@ -4,13 +4,9 @@ import androidx.test.espresso.Espresso.*
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.RootMatchers
-import androidx.test.espresso.matcher.RootMatchers.withDecorView
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import org.hamcrest.Matchers.*
-import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -85,13 +81,16 @@ class MainActivityTest {
         onView(withId(R.id.et_name)).perform(typeText(CORRECT_NAME_INPUT), ViewActions.closeSoftKeyboard())
         onView(withId(R.id.et_phone)).perform(typeText(CORRECT_PHONE_NUMBER_INPUT), ViewActions.closeSoftKeyboard())
         onView(withId(R.id.et_email)).perform(typeText(CORRECT_EMAIL_INPUT), ViewActions.closeSoftKeyboard())
-        onView(withId(R.id.sex_drop_down)).perform(click())
-//        onData(anything()).inAdapterView(withId(R.id.sex_drop_down)).atPosition(1).perform(click())
-        onData(anything())
-            .inAdapterView(withId(R.id.sex_drop_down))
-            .atPosition(1)
-            .perform(click())
+        onView(withId(R.id.sex_drop_down)).perform(
+            replaceText("Male")
+        )
+        ViewActions.closeSoftKeyboard()
         onView(withId(R.id.button_register)).perform(click())
+
+        onView(withId(R.id.name_content)).check(matches(withText(CORRECT_NAME_INPUT)))
+        onView(withId(R.id.phone_content)).check(matches(withText(CORRECT_PHONE_NUMBER_INPUT)))
+        onView(withId(R.id.email_content)).check(matches(withText(CORRECT_EMAIL_INPUT)))
+        onView(withId(R.id.sex_content)).check(matches(withText("Male")))
 
     }
 

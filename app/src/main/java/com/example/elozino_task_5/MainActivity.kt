@@ -12,8 +12,6 @@ import com.google.android.material.textfield.TextInputEditText
 
 class MainActivity : AppCompatActivity() {
 
-    var information = hashMapOf<String, String>()
-
     lateinit var nameText: String
     lateinit var phoneNumberValue: String
     lateinit var emailText: String
@@ -47,43 +45,40 @@ class MainActivity : AppCompatActivity() {
             emailText = email.text.toString()
             sexText = sexDropDown.text.toString()
 
-            if(ValidatorUtil.isNameValid(nameText)) {
-                information.put("name", nameText)
-            } else Toast.makeText(this, "Please input a valid name", Toast.LENGTH_SHORT).show()
+            if(!ValidatorUtil.isNameValid(nameText)) {
+                Toast.makeText(this, "Please input a valid name", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
-            if (ValidatorUtil.isPhoneNumberValid(phoneNumberValue)) {
-                information.put("phone", phoneNumberValue)
-            } else Toast.makeText(this, "Input correct phone number", Toast.LENGTH_SHORT).show()
+            if (!ValidatorUtil.isPhoneNumberValid(phoneNumberValue)) {
+                Toast.makeText(this, "Input correct phone number", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
-            if (ValidatorUtil.isEmailValid(emailText)) {
-                information.put("email", emailText)
-            }  else Toast.makeText(this, "Please input a valid email address", Toast.LENGTH_SHORT).show()
+            if (!ValidatorUtil.isEmailValid(emailText)) {
+                Toast.makeText(this, "Please input a valid email address", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
-            if (ValidatorUtil.isSexEntryValid(sexText)) {
-                information.put("sex", sexText)
-            } else Toast.makeText(this, "Select sex", Toast.LENGTH_SHORT).show()
+            if (!ValidatorUtil.isSexEntryValid(sexText)) {
+                Toast.makeText(this, "Select sex", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
 
             //confirm if all validation calls are passed
-            if(information.containsKey("name") && information.containsKey("phone") && information.containsKey("email") && information.containsKey("sex")) {
-                loadNextActivity(information)
+            if(nameText.isNotBlank() && phoneNumberValue.isNotBlank() && emailText.isNotBlank() && sexText.isNotBlank()) {
+                loadNextActivity(nameText, phoneNumberValue, emailText, sexText)
             }
         }
-
     }
 
-    private fun loadNextActivity(information: HashMap<String, String>) {
-        var intent = Intent(this@MainActivity, InformationActivity::class.java)
-        intent.putExtra("name", information.get("name"))
-        intent.putExtra("phone", information.get("phone"))
-        intent.putExtra("email", information.get("email"))
-        intent.putExtra("sex", information.get("sex"))
-
-        //clear the input fields after the register button is tapped
-        nameText = ""
-        phoneNumberValue = ""
-        emailText = ""
-        sexText = ""
+    private fun loadNextActivity(name: String, phone: String, email: String, sex: String) {
+        val intent = Intent(this@MainActivity, InformationActivity::class.java)
+        intent.putExtra("name", name)
+        intent.putExtra("phone", phone)
+        intent.putExtra("email", email)
+        intent.putExtra("sex", sex)
 
         //launch the activity showing the user's information
         startActivity(intent)
